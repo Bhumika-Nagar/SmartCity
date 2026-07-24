@@ -1,1 +1,62 @@
-@import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-concrete text-ink font-body antialiased;
+}
+
+/* Signature element: the "work-order ticket" card used for complaints.
+   Perforated notch edges + a stamped badge, like a physical civic ticket. */
+.ticket {
+  @apply relative bg-panel border border-line rounded-ticket;
+  background-image:
+    radial-gradient(circle at 0 50%, #F2F4F1 6px, transparent 6.5px),
+    radial-gradient(circle at 100% 50%, #F2F4F1 6px, transparent 6.5px);
+  background-position: left center, right center;
+  background-repeat: no-repeat;
+}
+
+.ticket-stamp {
+  @apply font-display uppercase tracking-widest text-[11px];
+}
+
+/* Signature element: transit-map style status line for complaint timelines */
+.transit-line {
+  @apply relative flex flex-col;
+}
+.transit-line::before {
+  content: '';
+  @apply absolute left-[7px] top-2 bottom-2 w-[2px] bg-line;
+}
+.transit-stop {
+  @apply relative pl-8 py-3;
+}
+.transit-stop::before {
+  content: '';
+  @apply absolute left-0 top-4 w-4 h-4 rounded-full bg-panel border-2 border-line;
+}
+.transit-stop.is-done::before {
+  @apply border-signal bg-signal;
+}
+.transit-stop.is-current::before {
+  @apply border-signal bg-panel;
+  box-shadow: 0 0 0 4px theme('colors.signal.light');
+}
+
+:focus-visible {
+  outline: 2px solid #1D5C4A;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
