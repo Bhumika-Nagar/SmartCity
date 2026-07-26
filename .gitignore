@@ -12,3 +12,6 @@ data/raw/*
 
 # Environment
 .env
+
+ml-service/data/raw/*.csv
+ml-service/data/processed/*.csv
